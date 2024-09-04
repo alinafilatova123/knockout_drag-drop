@@ -1,1 +1,2 @@
-# knockout_drag-drop
+# Тестовое задание
+Реализация drag&drop на Knockout.js
