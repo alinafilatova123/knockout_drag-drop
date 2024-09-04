@@ -1,0 +1,158 @@
+$svg: "data:image/svg+xml,%3Csvg width='8' height='15' viewBox='0 0 8 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.69594 14.7086C4.30473 15.0991 3.67045 15.0991 3.27924 14.7086L0.293409 11.7296C-0.097803 11.339 -0.0978031 10.7059 0.293409 10.3153C0.684621 9.92482 1.3189 9.92482 1.71011 10.3153L4.69594 13.2944C5.08715 13.6849 5.08715 14.318 4.69594 14.7086Z' fill='black'/%3E%3Cpath d='M3.30385 14.7086C3.69506 15.0991 4.32934 15.0991 4.72055 14.7086L7.70659 11.7296C8.0978 11.339 8.0978 10.7059 7.70659 10.3153C7.31538 9.92482 6.6811 9.92482 6.28989 10.3153L3.30385 13.2944C2.91264 13.6849 2.91264 14.318 3.30385 14.7086Z' fill='black'/%3E%3Cpath d='M3.98759 14.0157C3.43433 14.0157 2.98583 13.5679 2.98583 13.0157V3C2.98583 2.44772 3.43433 2 3.98759 2C4.54085 2 4.98935 2.44772 4.98935 3V13.0157C4.98935 13.5679 4.54085 14.0157 3.98759 14.0157Z' fill='black'/%3E%3Cpath d='M4.69594 0.292893C4.30473 -0.0976311 3.67045 -0.0976311 3.27924 0.292893L0.293409 3.27191C-0.097803 3.66243 -0.0978031 4.2956 0.293409 4.68612C0.684621 5.07664 1.3189 5.07664 1.71011 4.68612L4.69594 1.70711C5.08715 1.31658 5.08715 0.683417 4.69594 0.292893Z' fill='black'/%3E%3Cpath d='M3.30385 0.292893C3.69506 -0.0976311 4.32934 -0.0976311 4.72055 0.292893L7.70659 3.27191C8.0978 3.66243 8.0978 4.2956 7.70659 4.68612C7.31538 5.07664 6.6811 5.07664 6.28989 4.68612L3.30385 1.70711C2.91264 1.31658 2.91264 0.683417 3.30385 0.292893Z' fill='black'/%3E%3C/svg%3E";
+
+* {
+    box-sizing: border-box;
+    font-family: Fira Sans;
+    list-style: none;
+}
+
+body {
+    margin: 0;
+    padding: 50px 0 30px 30px;
+}
+
+.categories {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 1160px;
+    position: relative;
+}
+
+.category {
+    max-height: 100%;
+    transition: max-height 0.2s ease-out;
+
+    &__block {
+        outline: 1px solid #DFE4EF;
+        background-color: #FFFFFF;
+        position: relative;
+        cursor: pointer;
+        padding: 13px 16px;
+        transition: 0.4s;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    &__arrow {
+        border: 1px solid #D3D8DF;
+        border-radius: 50%;
+        height: 22px;
+        width: 22px;
+        background-color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        rotate: initial;
+        transition: rotate 0.2s ease-out;
+
+        &_active {
+            rotate: 180deg;
+            transition: rotate 0.2s ease-out;
+        }
+    }
+
+    &__title {
+        font-size: 15px;
+        font-weight: 500;
+        text-align: left;
+        margin-left: 14px;
+    }
+}
+
+.documents {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.document {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border: 1px solid #DFE4EF;
+    background-color: #FFFFFF;
+    border-top: none;
+    height: 35px;
+    width: 1144px;
+
+    &__title {
+        font-size: 13px;
+        font-weight: 400;
+        text-align: left;
+    }
+}
+
+.hide {
+    opacity: 0;
+}
+
+.show {
+    opacity: 1;
+}
+
+.drag {
+    display: flex;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    height: 15px;
+    width: 8px;
+    background-color: #8E9CBB;
+    -webkit-mask: url($svg);
+    mask: url($svg);
+}
+
+.dragged {
+    width: 100%;
+    z-index: 5;
+    opacity: 1;
+
+    .category__block {
+        box-shadow: 0px 3px 16px 0px #0066FFB2;
+    }
+}
+
+.dragged.document {
+    box-shadow: 0px 3px 16px 0px #0066FFB2;
+}
+
+.category.dragged, .document.dragged {
+    .drag {
+        background-color: #0066FF;
+    }
+}
+
+.placeholder {
+    height: 100%;
+    opacity: .5;
+    pointer-events: none;
+    position: static !important;
+}
+
+.b-bottom {
+    border-bottom: 4px solid #0066ff;
+}
+  
+.b-top {
+    border-top: 4px solid #0066ff;
+}
+  
+.move {
+    width: 8px;
+    height: 15px;
+    font-size: 15px;
+    margin-left: auto;
+}

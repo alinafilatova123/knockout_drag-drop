@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <title>knockout app</title>
+</head>
+<body>
+    <ul class="categories" data-bind="foreach: categories">
+        <li 
+            class="category" 
+            draggable="true" 
+            data-bind="attr: { 'id': id }"
+        >
+          <div class="category__block">
+                <div class="category__wrapper">
+                    <button class="category__arrow">
+                        <img src="./icons/shevron.svg" alt="shevron">
+                    </button>
+                    <div class="category__title" data-bind="text: tittle"></div>
+                </div>
+                <div class="drag"></div>
+          </div>
+  
+          <ul
+            class="documents"
+            data-bind="foreach: docs, attr: { 'data-category': tittle }"
+          >
+                <div
+                    class="document"
+                    draggable="true"
+                    data-bind="attr: { 'id': sub_id }"
+                >
+                    <li class="document__title" data-bind="text: tittle"></li>
+                    <div class="drag"></div>
+                </div>
+          </ul>
+        </li>
+    </ul>
+
+    <script src = "https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js" type = "text/javascript"></script>
+    <script type="module" src='index.js'></script>
+</body>
+</html>
