@@ -22,7 +22,7 @@ body {
 
 .category {
     max-height: 100%;
-    transition: max-height 0.2s ease-out;
+    transition: max-height 0.2s ease;
 
     &__block {
         outline: 1px solid #DFE4EF;
@@ -30,7 +30,7 @@ body {
         position: relative;
         cursor: pointer;
         padding: 13px 16px;
-        transition: 0.4s;
+        transition: 0.2s;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -53,11 +53,11 @@ body {
         justify-content: center;
         cursor: pointer;
         rotate: initial;
-        transition: rotate 0.2s ease-out;
+        transition: rotate 0.2s ease;
 
         &_active {
             rotate: 180deg;
-            transition: rotate 0.2s ease-out;
+            transition: rotate 0.2s ease;
         }
     }
 
@@ -76,7 +76,7 @@ body {
     padding: 0;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.2s ease-out;
+    transition: max-height 0.2s ease;
 }
 
 .document {

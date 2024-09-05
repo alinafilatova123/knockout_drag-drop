@@ -4,7 +4,7 @@ import {
     getAppendPosition,
     toggleDrop,
     appendElement,
-} from './src/utils.js'
+} from './src/utils.js';
 
 let categoryId = 1, documentId = 1;
 
@@ -20,7 +20,7 @@ function ListItem(tittle, docs) {
         })
     );
     self.id = categoryId++;
-}
+};
 
 function ItemsModel() {
     const self = this;
@@ -46,7 +46,7 @@ function ItemsModel() {
             'Знать глядь тоска.',
         ]),
     ]);
-}
+};
 
 ko.applyBindings(new ItemsModel());
 
@@ -65,6 +65,8 @@ function handleDragStart(e) {
     if (!e.target.classList.contains('drag')) return;
 
     const {draggedEl, type} = defineDraggedEl(e);
+
+    // Добавление плейсхолдера на место перетаскиваемого элемента
     addPlaceholder(draggedEl);
 
     x = e.clientX - draggedEl.offsetLeft;
@@ -72,7 +74,8 @@ function handleDragStart(e) {
 
     placementDraggedEl(e, draggedEl);
 
-    if (type === 'category') draggedEl.querySelector('.documents').classList.add('hide')
+    // Скрытие документов при перетаскивании категории
+    if (type === 'category') draggedEl.querySelector('.documents').classList.add('hide');
     
     document.addEventListener('mousemove', handleDragMove);
     document.addEventListener('mouseup', handleDragEnd);
@@ -80,7 +83,7 @@ function handleDragStart(e) {
     draggedEl.classList.add('dragged');
     draggedEl.style.position = 'absolute';
     categories.style.cursor = 'drag';
-    return true
+    return true;
 }
 
 // dragmove
@@ -89,7 +92,7 @@ function handleDragMove(e) {
   
     const draggedEl = document.querySelector('.dragged');
     placementDraggedEl(e, draggedEl);
-    showBorder(e, draggedEl, anchorElement)
+    showBorder(e, draggedEl, anchorElement);
 }
 
 // dragend
@@ -97,12 +100,14 @@ function handleDragEnd(e) {
     if (e) e.preventDefault();
     const draggedEl = document.querySelector('.dragged');
 
+    // Не перетаскиваем элемент при клике
     if(!anchorElement) {
-        document.querySelector('.documents').classList.remove('hide')
+        let docs = draggedEl && draggedEl.querySelector('.documents');
+        docs && docs.classList.remove('hide');
         resetDraggedEl(draggedEl)
         document.removeEventListener('mousemove', handleDragMove);
         removePlaceholder();
-        return
+        return;
     }
 
     const isDocument = anchorElement.id.includes('document');
@@ -112,7 +117,7 @@ function handleDragEnd(e) {
     }
 
     if (draggedEl.className.split(' ')[0] === 'category') {
-        draggedEl.querySelector('.documents').classList.remove('hide')
+        draggedEl.querySelector('.documents').classList.remove('hide');
     }
 
     let apendMethod = getAppendPosition(anchorElement, isDocument);
@@ -122,7 +127,7 @@ function handleDragEnd(e) {
 
     anchorElement = null;
     hideBorder();
-    resetDraggedEl(draggedEl)
+    resetDraggedEl(draggedEl);
 
     document.removeEventListener('mousemove', handleDragMove);
     document.removeEventListener('mouseup', handleDragEnd);
@@ -140,12 +145,12 @@ function addPlaceholder(draggedEl) {
             draggedEl.parentElement.prepend(placeholderElement);
         }
     });
-}
+};
 
 function removePlaceholder() {
     placeholderElement.style.height = 0;
     placeholderElement.remove();
-}
+};
 
 function showBorder(e, draggedEl) {
     const x = e.clientX;
@@ -164,6 +169,7 @@ function showBorder(e, draggedEl) {
     const bottom = anchorElement.getBoundingClientRect().bottom;
 
     hideBorder();
+
     borderEl.classList.add('border');
     if (e.clientY < (top + bottom) / 2) {
         borderEl.classList.add('b-top');
@@ -172,7 +178,7 @@ function showBorder(e, draggedEl) {
         borderEl.classList.add('b-bottom');
         borderEl.classList.remove('b-top');
     }
-}
+};
 
 function hideBorder() {
     document
@@ -182,14 +188,14 @@ function hideBorder() {
         .querySelectorAll('.b-bottom')
         .forEach((e) => e.classList.remove('b-bottom'));
     document.querySelector('.border')?.classList.remove('border');
-}
+};
 
 function placementDraggedEl(e, draggedEl) {
     draggedEl.style.top = (e.clientY - y).toString() + 'px';
     draggedEl.style.left = (e.clientX - x).toString() + 'px';
-}
+};
 
-const arrowBtns = document.querySelectorAll('.category__arrow')
+const arrowBtns = document.querySelectorAll('.category__arrow');
 arrowBtns.forEach(btn => btn.addEventListener('click', toggleDrop));
 const dragBtns = document.querySelectorAll('.drag');
 dragBtns.forEach(btn => btn.addEventListener('mousedown', handleDragStart));
