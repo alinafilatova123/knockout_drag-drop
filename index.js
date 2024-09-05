@@ -161,7 +161,7 @@ function showBorder(e, draggedEl) {
 
     const borderEl = elementsUnderCursor.filter((e) => e.classList.contains(isDocument ? 'document' : 'category__block')).pop();
     
-    anchorElement = isDocument ? borderEl : borderEl.parentElement;
+    anchorElement = isDocument ? borderEl : borderEl?.parentElement;
 
     if (!anchorElement || !anchorElement.id || draggedEl.id === anchorElement.id) return;
 

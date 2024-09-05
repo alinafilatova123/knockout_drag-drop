@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack serve --mode development"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,13 @@
   },
   "homepage": "https://github.com/alinafilatova123/knockout_drag-drop#readme",
   "dependencies": {
-    "sass": "^1.77.8"
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.6.0",
+    "sass": "^1.77.8",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^5.1.0"
   }
 }
